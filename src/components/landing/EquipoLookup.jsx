@@ -182,17 +182,17 @@ export default function EquipoLookup() {
             </article>
 
             {/* Lateral: Resumen / CTA */}
-            {/* <aside
+            <aside
               className="rounded-2xl border p-6 space-y-4"
               style={{ borderColor: "#ffffff22", backgroundColor: "#ffffff10" }}
             >
               <h4 className="font-semibold">Acciones</h4>
               <a
-                href="#contacto"
+                href="https://api.whatsapp.com/send?phone=543534275476"
                 className="inline-flex w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold shadow-md hover:shadow-lg transition"
                 style={{ backgroundColor: COLORS.accent, color: "#0B1A24" }}
               >
-                Contactar al cliente
+                Contactar al Servicio Técnico
               </a>
 
               <div className="pt-3 border-t" style={{ borderColor: "#ffffff22" }}>
@@ -203,7 +203,7 @@ export default function EquipoLookup() {
                   <li>Estado: {equipo.estado_nombre}</li>
                 </ul>
               </div>
-            </aside> */}
+            </aside>
           </div>
         )}
       </div>
