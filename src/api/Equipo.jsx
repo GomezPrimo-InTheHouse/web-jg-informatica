@@ -30,7 +30,7 @@ export async function fetchEquipoByMarcaModeloDni({ marca, modelo, dni }) {
         dni,
       },
       timeout: 10000, // 10s
-      validateStatus: (status) => status < 500, // evita que axios lance error automático
+    //   validateStatus: (status) => status < 500, // evita que axios lance error automático
     });
 
     if (response.status === 404) {

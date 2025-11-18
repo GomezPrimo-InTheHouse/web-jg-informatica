@@ -178,7 +178,7 @@
 import React, { useState } from 'react';
 // Importamos iconos de Lucide
 import { Monitor, Smartphone, ShoppingCart, Camera, Clock, FileText, Search, HardHat } from 'lucide-react'; 
-
+import LogoRedondo from '../../assets/logo-2-sinfondo-blanco.png';
 // ⬇️ NUEVO: import del componente de lookup (ajustá la ruta si corresponde)
 import EquipoLookupWidget from "../../components/landing/EquipoLookup.jsx";
 
@@ -245,7 +245,7 @@ export default function Features() {
   ];
 
   return (
-    // CAMBIO CLAVE: Usamos 'style' para forzar el fondo a Negro Absoluto (#000000)
+    
     <section 
       id="servicios-técnicos" 
       className={`border-t border-white/10 py-16 md:py-24`} 
@@ -255,7 +255,15 @@ export default function Features() {
         
         {/* Encabezado */}
         <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
-          <HardHat className="w-10 h-10 mx-auto text-white" style={{ color: COLORS.BRIGHT_BLUE_ACCENT }} />
+          {/* <HardHat  style={{ color: COLORS.BRIGHT_BLUE_ACCENT }} /> */}
+
+
+
+          <img className="w-20 h-20 mx-auto text-white" src={LogoRedondo} alt="Logo JGP" >
+          </img>
+
+
+
           <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-white leading-tight">
             Especialistas en Servicio Técnico
           </h2>

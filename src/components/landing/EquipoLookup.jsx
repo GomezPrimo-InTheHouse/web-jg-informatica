@@ -74,21 +74,21 @@ export default function EquipoLookup() {
           <input
             value={marca}
             onChange={(e) => setMarca(e.target.value)}
-            placeholder="Marca (ej: Samsung)"
+            placeholder="Marca (ej: Apple)"
             className="w-full rounded-xl border px-3 py-2 text-sm bg-[#1b2634] placeholder-white/50 focus:outline-none focus:ring"
             style={{ borderColor: "#ffffff22" }}
           />
           <input
             value={modelo}
             onChange={(e) => setModelo(e.target.value)}
-            placeholder="Modelo (ej: A02)"
+            placeholder="Modelo (ej: iPhone 12)"
             className="w-full rounded-xl border px-3 py-2 text-sm bg-[#1b2634] placeholder-white/50 focus:outline-none focus:ring"
             style={{ borderColor: "#ffffff22" }}
           />
           <input
             value={dni}
             onChange={(e) => setDni(e.target.value)}
-            placeholder="DNI (ej: 29717567)"
+            placeholder="DNI"
             className="w-full rounded-xl border px-3 py-2 text-sm bg-[#1b2634] placeholder-white/50 focus:outline-none focus:ring"
             style={{ borderColor: "#ffffff22" }}
           />
