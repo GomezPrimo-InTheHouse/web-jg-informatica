@@ -826,7 +826,7 @@ function IABotsCallout() {
             <span className="mt-1 inline-flex items-center gap-1 text-sm px-4 py-1 rounded-full bg-white/10 text-[${accent}] font-semibold">
               <span className={`w-2 h-2 rounded-full bg-[${accent}] animate-ping absolute opacity-75`} />
               <span className={`w-2 h-2 rounded-full bg-[${accent}] relative`} />
-              Futuro Digital
+              Próximamente
             </span>
             <p className={`mt-3 text-lg text-[${COLORS.textSecondary}] leading-relaxed max-w-2xl`}>
               Automatiza tareas repetitivas y mejora la experiencia del cliente con agentes conversacionales conectados directamente a tus datos.
@@ -836,7 +836,7 @@ function IABotsCallout() {
 
         {/* CTA para Bots */}
         <CTAButton onClick={() => console.log("Redirigiendo a Solicitud de Demo de IA")}>
-            Solicitar Demo de IA
+            Solicitar Demo de IA - (Próximamente)
         </CTAButton>
       </div>
 
