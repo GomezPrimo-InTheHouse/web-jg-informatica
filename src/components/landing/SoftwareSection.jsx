@@ -974,7 +974,7 @@ export default function SoftwareSection() {
               <h4 className={`text-[${COLORS.textPrimary}] font-bold text-2xl mb-6 border-b border-[${accent}]/40 pb-3`}>Nuestro Proceso de Trabajo</h4>
               
               {/* Timeline visual */}
-              <ol className={`relative space-y-8 ml-2 border-l-2 border-[${accent}]/50`}>
+              <ol className={`relative space-y-8 ml-2 `}>
                 {[
                   { n: 1, t: "Descubrimiento", d: "Relevamos objetivos, procesos clave y definimos el alcance estratégico." },
                   { n: 2, t: "Diseño UX/UI", d: "Prototipado de alta fidelidad para validar usabilidad y flujo con los stakeholders." },

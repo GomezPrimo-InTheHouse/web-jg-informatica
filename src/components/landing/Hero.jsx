@@ -55,125 +55,125 @@ const TABS = [
 
 /* ----------------------------- MODAL DE SEGUIMIENTO DE EQUIPO ----------------------------- */
 
-const StatusModal = ({ isOpen, onClose }) => {
-    const [dni, setDni] = useState('');
-    const [model, setModel] = useState('');
-    const [status, setStatus] = useState(null); // null, 'loading', or { state, details }
+// const StatusModal = ({ isOpen, onClose }) => {
+//     const [dni, setDni] = useState('');
+//     const [model, setModel] = useState('');
+//     const [status, setStatus] = useState(null); // null, 'loading', or { state, details }
     
-    // Simula la llamada a un backend para obtener el estado del equipo
-    const handleCheckStatus = useCallback((e) => {
-        e.preventDefault();
+//     // Simula la llamada a un backend para obtener el estado del equipo
+//     const handleCheckStatus = useCallback((e) => {
+//         e.preventDefault();
         
-        if (!dni || !model) {
-            setStatus({ state: 'error', details: 'Por favor, ingrese DNI y Modelo.' });
-            return;
-        }
+//         if (!dni || !model) {
+//             setStatus({ state: 'error', details: 'Por favor, ingrese DNI y Modelo.' });
+//             return;
+//         }
 
-        setStatus('loading');
+//         setStatus('loading');
 
-        // --- INICIO DE LÓGICA DE CONEXIÓN CON BACKEND ---
-        // Aquí es donde harías la llamada a tu API, por ejemplo:
-        // fetch('/api/check-status', { method: 'POST', body: JSON.stringify({ dni, model }) })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     setStatus({ state: data.status, details: data.message });
-        //   })
-        //   .catch(err => {
-        //     setStatus({ state: 'error', details: 'Error de conexión. Intente más tarde.' });
-        //   });
+//         // --- INICIO DE LÓGICA DE CONEXIÓN CON BACKEND ---
+//         // Aquí es donde harías la llamada a tu API, por ejemplo:
+//         // fetch('/api/check-status', { method: 'POST', body: JSON.stringify({ dni, model }) })
+//         //   .then(res => res.json())
+//         //   .then(data => {
+//         //     setStatus({ state: data.status, details: data.message });
+//         //   })
+//         //   .catch(err => {
+//         //     setStatus({ state: 'error', details: 'Error de conexión. Intente más tarde.' });
+//         //   });
         
-        // SIMULACIÓN (Reemplazar por la lógica de arriba)
-        setTimeout(() => {
-            const simulatedResponses = [
-                { state: 'En diagnóstico', details: 'Tu equipo está siendo evaluado por el técnico.' },
-                { state: 'Esperando repuesto', details: 'Se ha solicitado el repuesto. Tiempo estimado de llegada: 3 días hábiles.' },
-                { state: 'Listo para retiro', details: '¡Tu equipo está reparado y listo! Puedes pasar a retirarlo.' },
-                { state: 'No encontrado', details: 'No se encontraron registros con ese DNI y Modelo. Verifique los datos.' }
-            ];
+//         // SIMULACIÓN (Reemplazar por la lógica de arriba)
+//         setTimeout(() => {
+//             const simulatedResponses = [
+//                 { state: 'En diagnóstico', details: 'Tu equipo está siendo evaluado por el técnico.' },
+//                 { state: 'Esperando repuesto', details: 'Se ha solicitado el repuesto. Tiempo estimado de llegada: 3 días hábiles.' },
+//                 { state: 'Listo para retiro', details: '¡Tu equipo está reparado y listo! Puedes pasar a retirarlo.' },
+//                 { state: 'No encontrado', details: 'No se encontraron registros con ese DNI y Modelo. Verifique los datos.' }
+//             ];
             
-            // Lógica simple para simular un estado basado en el DNI (ejemplo)
-            const index = (parseInt(dni) % 4);
-            const result = simulatedResponses[index];
+//             // Lógica simple para simular un estado basado en el DNI (ejemplo)
+//             const index = (parseInt(dni) % 4);
+//             const result = simulatedResponses[index];
 
-            setStatus({ state: result.state, details: result.details });
+//             setStatus({ state: result.state, details: result.details });
 
-        }, 1500); // 1.5 segundos de simulación de carga
-        // --- FIN DE LÓGICA DE CONEXIÓN CON BACKEND ---
+//         }, 1500); // 1.5 segundos de simulación de carga
+//         // --- FIN DE LÓGICA DE CONEXIÓN CON BACKEND ---
 
-    }, [dni, model]);
+//     }, [dni, model]);
 
-    if (!isOpen) return null;
+//     if (!isOpen) return null;
 
-    const isError = status && status.state === 'error' || status && status.state === 'No encontrado';
-    const isSuccess = status && status.state && !isError && status !== 'loading';
+//     const isError = status && status.state === 'error' || status && status.state === 'No encontrado';
+//     const isSuccess = status && status.state && !isError && status !== 'loading';
 
-    return (
-        <div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-            onClick={onClose}
-        >
-            <div 
-                className={`bg-[${COLORS.VERY_DARK_BG}] rounded-xl p-6 md:p-8 w-full max-w-md shadow-2xl border border-[${COLORS.STEEL_BLUE_ACCENT}]/30`}
-                onClick={e => e.stopPropagation()}
-            >
-                <div className="flex justify-between items-start">
-                    <h2 className={`text-2xl font-bold text-white flex items-center`} style={{ color: COLORS.STEEL_BLUE_ACCENT }}>
-                        <Search className="w-6 h-6 mr-2" /> Seguimiento de Equipo
-                    </h2>
-                    <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
-                        <X className="w-6 h-6" />
-                    </button>
-                </div>
+//     return (
+//         <div 
+//             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+//             onClick={onClose}
+//         >
+//             <div 
+//                 className={`bg-[${COLORS.VERY_DARK_BG}] rounded-xl p-6 md:p-8 w-full max-w-md shadow-2xl border border-[${COLORS.STEEL_BLUE_ACCENT}]/30`}
+//                 onClick={e => e.stopPropagation()}
+//             >
+//                 <div className="flex justify-between items-start">
+//                     <h2 className={`text-2xl font-bold text-white flex items-center`} style={{ color: COLORS.STEEL_BLUE_ACCENT }}>
+//                         <Search className="w-6 h-6 mr-2" /> Seguimiento de Equipo
+//                     </h2>
+//                     <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
+//                         <X className="w-6 h-6" />
+//                     </button>
+//                 </div>
                 
-                <p className="mt-2 text-sm text-gray-400 border-b border-white/10 pb-4">
-                    Ingresa tu número de identificación y el modelo del equipo para consultar su estado en el taller.
-                </p>
+//                 <p className="mt-2 text-sm text-gray-400 border-b border-white/10 pb-4">
+//                     Ingresa tu número de identificación y el modelo del equipo para consultar su estado en el taller.
+//                 </p>
 
-                <EquipoLookupWidget COLORS={COLORS} />
+//                 <EquipoLookupWidget COLORS={COLORS} />
 
-                <form onSubmit={handleCheckStatus} className="mt-5 space-y-4">
-                    <input
-                        type="number"
-                        placeholder="Número de DNI/Identificación"
-                        value={dni}
-                        onChange={(e) => { setDni(e.target.value); setStatus(null); }}
-                        className={`w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:ring-2 focus:ring-[${COLORS.STEEL_BLUE_ACCENT}] outline-none`}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Modelo del Equipo (Ej: iPhone 12, HP Pavilion)"
-                        value={model}
-                        onChange={(e) => { setModel(e.target.value); setStatus(null); }}
-                        className={`w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:ring-2 focus:ring-[${COLORS.STEEL_BLUE_ACCENT}] outline-none`}
-                        required
-                    />
+//                 <form onSubmit={handleCheckStatus} className="mt-5 space-y-4">
+//                     <input
+//                         type="number"
+//                         placeholder="Número de DNI/Identificación"
+//                         value={dni}
+//                         onChange={(e) => { setDni(e.target.value); setStatus(null); }}
+//                         className={`w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:ring-2 focus:ring-[${COLORS.STEEL_BLUE_ACCENT}] outline-none`}
+//                         required
+//                     />
+//                     <input
+//                         type="text"
+//                         placeholder="Modelo del Equipo (Ej: iPhone 12, HP Pavilion)"
+//                         value={model}
+//                         onChange={(e) => { setModel(e.target.value); setStatus(null); }}
+//                         className={`w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:ring-2 focus:ring-[${COLORS.STEEL_BLUE_ACCENT}] outline-none`}
+//                         required
+//                     />
                     
-                    <button
-                        type="submit"
-                        disabled={status === 'loading'}
-                        className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-bold text-white transition duration-300
-                                   bg-[${COLORS.STEEL_BLUE_ACCENT}] hover:bg-[#3d6d9c] shadow-lg shadow-[${COLORS.STEEL_BLUE_ACCENT}]/40`}
-                    >
-                        {status === 'loading' ? (
-                            <><Loader2 className="w-5 h-5 animate-spin" /> Verificando...</>
-                        ) : (
-                            <>Consultar Estado</>
-                        )}
-                    </button>
-                </form>
+//                     <button
+//                         type="submit"
+//                         disabled={status === 'loading'}
+//                         className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-bold text-white transition duration-300
+//                                    bg-[${COLORS.STEEL_BLUE_ACCENT}] hover:bg-[#3d6d9c] shadow-lg shadow-[${COLORS.STEEL_BLUE_ACCENT}]/40`}
+//                     >
+//                         {status === 'loading' ? (
+//                             <><Loader2 className="w-5 h-5 animate-spin" /> Verificando...</>
+//                         ) : (
+//                             <>Consultar Estado</>
+//                         )}
+//                     </button>
+//                 </form>
 
-                {/* Área de Resultados */}
-                {status && status !== 'loading' && (
-                    <div className={`mt-5 p-4 rounded-lg text-white border-l-4 ${isError ? 'bg-red-900/30 border-red-500' : 'bg-green-900/30 border-green-500'}`}>
-                        <p className="font-bold text-lg">{status.state}</p>
-                        <p className="text-sm mt-1">{status.details}</p>
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-};
+//                 {/* Área de Resultados */}
+//                 {status && status !== 'loading' && (
+//                     <div className={`mt-5 p-4 rounded-lg text-white border-l-4 ${isError ? 'bg-red-900/30 border-red-500' : 'bg-green-900/30 border-green-500'}`}>
+//                         <p className="font-bold text-lg">{status.state}</p>
+//                         <p className="text-sm mt-1">{status.details}</p>
+//                     </div>
+//                 )}
+//             </div>
+//         </div>
+//     );
+// };
 
 /* ----------------------------- VISUALIZADOR DE EXPERIENCIA DUAL ----------------------------- */
 
@@ -302,7 +302,7 @@ export default function Hero() {
                 {/* Texto del badge enfocado en la dualidad */}
                 <p className="text-sm font-semibold uppercase tracking-wider text-white/80">
                     Propuesta Dual | 
-                    <span className={`ml-2`} style={{ color: COLORS.STEEL_BLUE_ACCENT }}>Hardware</span> & 
+                    <span className={`ml-2`} style={{ color: COLORS.BRIGHT_BLUE_ACCENT }}>Hardware</span> & 
                     <span className={`ml-2`} style={{ color: COLORS.BRIGHT_BLUE_ACCENT }}>Software</span>
                 </p>
             </div>
@@ -384,7 +384,7 @@ export default function Hero() {
       </div>
       
       {/* [NUEVO COMPONENTE] Modal de Seguimiento */}
-      <StatusModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* <StatusModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
 
     </section>
   );
