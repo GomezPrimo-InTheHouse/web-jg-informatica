@@ -2,14 +2,14 @@ import { useState } from "react";
 
 const faqs = [
   // Técnicos
-  { q: "¿El diagnóstico tiene costo?", a: "El diagnóstico básico es sin cargo si avanzás con la reparación. Avisamos antes de comenzar." },
-  { q: "¿Qué garantía tienen las reparaciones?", a: "Garantía escrita. Depende del tipo de reparación y del repuesto (original/alternativo)." },
+  { q: "¿El diagnóstico tiene costo?", a: "El diagnóstico básico es sin cargo si avanzás con la reparación, caso contrario, (depende del diagnóstico evaluado), se cobra un 10% del valor del presupuesto" },
+  { q: "¿Qué garantía tienen las reparaciones?", a: "La garantía que ofrecemos depende del tipo de reparación y del repuesto (original/alternativo). Por lo general es de 30 / 60 días pero siempre depende del tipo de reparación" },
   { q: "¿Trabajan con repuestos originales?", a: "Sí. También alternativos de alta calidad. Siempre te damos opciones y presupuesto por escrito." },
   { q: "¿En cuánto tiempo entregan?", a: "Reparaciones comunes en 24–48 h. Si el repuesto es específico, te informamos el plazo estimado." },
 
   // Software
   { q: "¿Cómo es el proceso para un sistema a medida?", a: "Descubrimiento → Prototipo → Desarrollo + QA → Despliegue. Entregas parciales y feedback continuo." },
-  { q: "¿Pueden integrar pagos, mensajería o IoT?", a: "Sí. MercadoPago, Twilio/WhatsApp, Auth con 2FA, MQTT/IoT y otros conectores." },
+  { q: "¿Pueden integrar pagos, validación de identidad del usuario, mensajería o IoT?", a: "Sí. MercadoPago, Twilio/WhatsApp, Auth con 2FA, MQTT/IoT y otros conectores." },
   { q: "¿Qué stack utilizan?", a: "Frontend: React + Vite + Tailwind. Backend: Node + Express. DB: Supabase/PostgreSQL. Deploy en Vercel/Render." },
   { q: "¿Ofrecen soporte y mantenimiento?", a: "Sí. Planes de soporte con mejoras evolutivas y monitoreo según el nivel requerido." },
 ];
