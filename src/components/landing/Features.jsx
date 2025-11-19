@@ -207,7 +207,7 @@ export default function Features() {
 
     const items = [
         {
-            title: "Reparación Avanzada de Móviles",
+            title: "Reparación Avanzada de Celulares",
             desc: "Especialistas en la reparación de hardware de **Celulares y Tablets** (cambio de pantallas, baterías, conectores de carga, microsoldadura). Garantía escrita en todos los trabajos.",
             icon: Smartphone, // Nuevo icono para móviles
             accent: COLORS.BRIGHT_BLUE_ACCENT,
@@ -231,7 +231,7 @@ export default function Features() {
             accent: COLORS.STEEL_BLUE_ACCENT,
         },
         {
-            title: "Accesorios y Suministros",
+            title: "Accesorios y Suministros Electrónicos",
             desc: "Stock permanente de **cargadores, cables, periféricos, vidrios templados** y componentes originales o alternativos de alta calidad.",
             icon: ShoppingCart, // Icono para accesorios
             accent: COLORS.BRIGHT_BLUE_ACCENT,

@@ -193,7 +193,7 @@ function ExperienceVisual({ active, setActive }) {
         >
             <Wrench className={`w-10 h-10 ${transition}`} style={{ color: isActive ? COLORS.STEEL_BLUE_ACCENT : COLORS.SILVER_GRAY }} />
             {/* Nuevo título de énfasis para incluir Movilidad */}
-            <p className="mt-4 text-base font-extrabold uppercase tracking-widest text-white">HARDWARE, REDES & MOVILIDAD</p>
+            <p className="mt-4 text-base font-extrabold uppercase tracking-widest text-white">HARDWARE & SOFTWARE</p>
             {/* Título principal de la tarjeta sin años */}
             <h3 className="text-2xl font-bold mt-1 text-white">Servicio Técnico Informático</h3>
             {/* Descripción actualizada */}

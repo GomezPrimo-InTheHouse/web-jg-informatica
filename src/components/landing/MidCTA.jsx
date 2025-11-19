@@ -41,7 +41,7 @@ export default function MidCTA() {
             {/* TEXTO */}
             <div className="flex-1">
               <h3 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-                ¿Necesitás reparar tu equipo o cotizar un sistema?
+                ¿Necesitás reparar tu equipo o cotizar un sistema web?
               </h3>
 
               <p className="text-[16px] md:text-[17px] text-[#D9D9D9] mt-3 leading-relaxed">
