@@ -208,7 +208,7 @@ export default function Features() {
     const items = [
         {
             title: "Reparación Avanzada de Celulares",
-            desc: "Especialistas en la reparación de hardware de **Celulares y Tablets** (cambio de pantallas, baterías, conectores de carga, microsoldadura). Garantía escrita en todos los trabajos.",
+            desc: "Especialistas en la reparación de hardware de **Celulares y Tablets** (cambio de pantallas, baterías, conectores de carga, microsoldadura). Trabajos con garantías.",
             icon: Smartphone, // Nuevo icono para móviles
             accent: COLORS.BRIGHT_BLUE_ACCENT,
         },
