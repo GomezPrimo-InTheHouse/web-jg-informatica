@@ -1,6 +1,6 @@
 // src/components/Header.jsx
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Target, X } from "lucide-react";
 import logoJG from "../../assets/logo-1-sin-fondo.png"; 
 
 // Paleta
@@ -34,6 +34,8 @@ export default function Header() {
     { label: "Servicios Técnicos", href: "#servicios-tecnicos" },
     { label: "Software", href: "#software" },
     { label: "Preguntas Frecuentes", href: "#preguntas-frecuentes" },
+    //agregar pagina de shop
+    { label: "JG Shop", href: "https://app-shop-jg.vercel.app/", target: "_blank" },
   ];
 
   // Fondo dinámico del header
