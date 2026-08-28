@@ -12,7 +12,7 @@ const COLORS = {
 };
 
 export default function MidCTA() {
-  const wpLink = "https://api.whatsapp.com/send?phone=543534275476"; 
+  const wpLink = "https://api.whatsapp.com/send?phone=543534012117"; 
 
   return (
     <section
