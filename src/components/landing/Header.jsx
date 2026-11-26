@@ -5,9 +5,9 @@ import logoJG from "../../assets/logo-1-sin-fondo.png";
 
 // Paleta
 const COLORS = {
-  darkPrimary: "#0F1823",
+  darkPrimary: "#1A1A1A",
   lightText: "#FFFFFF",
-  accentGold: "#2f63d3ff",
+  accentGold: "#EE6A1A",
 };
 
 export default function Header() {
@@ -41,9 +41,9 @@ export default function Header() {
   // Fondo dinámico del header
   let headerClasses = "";
   if (isMenuOpen) {
-    headerClasses = "bg-[#0F1823] shadow-lg";
+    headerClasses = "bg-[#1A1A1A] shadow-lg";
   } else if (isScrolled) {
-    headerClasses = "backdrop-blur-md bg-[#0F1823]/90 shadow-lg";
+    headerClasses = "backdrop-blur-md bg-[#1A1A1A]/90 shadow-lg";
   } else {
     headerClasses = "bg-transparent";
   }
@@ -85,7 +85,7 @@ export default function Header() {
             className={`
               h-20 md:h-24 lg:h-28 
               object-contain rounded-full transition-all duration-300
-              hover:scale-105 hover:brightness-110 hover:drop-shadow-[0_0_10px_rgba(79,163,209,0.5)]
+              hover:scale-105 hover:brightness-110 hover:drop-shadow-[0_0_10px_rgba(238,106,26,0.45)]
               ${logoClass}
             `}
           />
@@ -100,9 +100,9 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className="
-                relative transition duration-300 hover:text-[#2f63d3ff]
+                relative transition duration-300 hover:text-[#EE6A1A]
                 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 
-                after:h-[2px] after:bg-[#2f63d3ff] hover:after:w-full after:transition-all after:duration-300
+                after:h-[2px] after:bg-[#EE6A1A] hover:after:w-full after:transition-all after:duration-300
               "
             >
               {link.label}
@@ -138,7 +138,7 @@ export default function Header() {
         className={`
           md:hidden absolute w-full transition-all duration-300 ease-in-out overflow-hidden 
           ${isMenuOpen ? "max-h-96 opacity-100 pb-4" : "max-h-0 opacity-0 py-0"}
-          bg-[#0F1823] shadow-xl
+          bg-[#1A1A1A] shadow-xl
         `}
       >
         <nav className="flex flex-col space-y-3 px-4">
@@ -149,7 +149,7 @@ export default function Header() {
               onClick={handleMobileLinkClick}
               className="
                 text-white text-base font-medium py-2 border-b border-white/10 
-                hover:text-[#2f63d3ff] transition
+                hover:text-[#EE6A1A] transition
               "
             >
               {link.label}
@@ -162,7 +162,7 @@ export default function Header() {
             onClick={handleMobileLinkClick}
             className="
               text-center mt-3 block rounded-full px-5 py-2.5 text-sm font-semibold 
-              bg-[#2f63d3ff] text-[#0F1823] hover:opacity-90 transition
+              bg-[#EE6A1A] text-[#1A1A1A] hover:opacity-90 transition
             "
           >
             Contacto

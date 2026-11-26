@@ -2,46 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes breath {
-  0%, 100% { transform: scale(1); opacity: .9; }
-  50% { transform: scale(1.06); opacity: 1; }
-}
-.animate-breath { animation: breath 4s ease-in-out infinite; }
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 0 rgba(79,163,209,0.0); }
-  50% { box-shadow: 0 0 24px rgba(79,163,209,0.35); }
-}
-.glow { animation: glow 4s ease-in-out infinite; }
+  body {
+    @apply bg-papel text-tinta font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
 
-/* ya tenés breath y glow; agregamos estas */
-@keyframes float-slow {
-  0%,100% { transform: translateY(0px); opacity: .9; }
-  50%     { transform: translateY(-6px); opacity: 1; }
-}
-.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+  h1, h2, h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
 
-@keyframes morph {
-  0%   { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
-  50%  { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; }
-  100% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
-}
-.animate-morph { animation: morph 10s ease-in-out infinite; }
+  p, li, dd {
+    text-wrap: pretty;
+  }
 
-@keyframes grid-shift {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-16px); }
-}
-.bg-grid {
-  background-image: linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+  ::selection {
+    background: #EE6A1A;
+    color: #1A1A1A;
+  }
+
+  :focus-visible {
+    outline: 2px solid #EE6A1A;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  html {
+    scrollbar-color: #1A1A1A #F1F1EE;
+  }
 }
 
-.bg-grid-animate {
-  background-position: 0 0;
-  animation: grid-shift 12s linear infinite;
-  will-change: transform;
+@layer components {
+  /* Borde troquelado superior e inferior, como el talón de una orden de servicio */
+  .ticket {
+    --muesca: 7px;
+    -webkit-mask:
+      radial-gradient(circle var(--muesca) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--muesca) * 3) 51% repeat-x,
+      radial-gradient(circle var(--muesca) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--muesca) * 3) 51% repeat-x;
+    mask:
+      radial-gradient(circle var(--muesca) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--muesca) * 3) 51% repeat-x,
+      radial-gradient(circle var(--muesca) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--muesca) * 3) 51% repeat-x;
+  }
+
+  .campo {
+    @apply w-full bg-transparent border-0 border-b-2 border-tinta px-0 pb-1.5 pt-1 text-lg font-medium text-tinta;
+    @apply placeholder:text-tinta-2/80 focus:border-naranja focus:outline-none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn-principal {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-naranja px-6 py-3 font-semibold text-tinta;
+    @apply transition-[background-color,transform] duration-150 hover:bg-[#F57E33] active:scale-[0.98];
+  }
+
+  .btn-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border-2 border-tinta px-6 py-2.5 font-semibold text-tinta;
+    @apply transition-colors duration-150 hover:bg-tinta hover:text-papel;
+  }
+}
+
+/* Avance del seguimiento: la línea se completa hasta el estado actual */
+@keyframes avance {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.avance {
+  transform-origin: left;
+  animation: avance 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sello {
+  from { opacity: 0; transform: scale(1.15) rotate(-6deg); }
+  to { opacity: 1; transform: scale(1) rotate(-3deg); }
+}
+.sello {
+  animation: sello 420ms cubic-bezier(0.16, 1, 0.3, 1) 450ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .avance, .sello { animation: none; }
+  .sello { transform: rotate(-3deg); }
 }
 
 /* Oculta scrollbars en contenedores horizontales */
