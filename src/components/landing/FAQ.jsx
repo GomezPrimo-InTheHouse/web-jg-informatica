@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "¿Cómo sigo el estado de mi equipo?",
-    a: "Arriba de todo, en «¿Cómo va tu equipo?», con tu DNI y la marca y el modelo como figuran en la orden.",
+    a: "Arriba de todo, en «¿Cómo va tu equipo?», con el DNI del titular y la marca del equipo. El modelo es opcional y ayuda si dejaste más de un equipo.",
   },
   {
     q: "¿Cómo es el proceso para un sistema a medida?",

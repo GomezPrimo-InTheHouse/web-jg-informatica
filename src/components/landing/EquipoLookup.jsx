@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { fetchEquipoByMarcaModeloDni } from "../../api/Equipo.jsx";
+import { consultarEstadoEquipo } from "../../api/Equipo.jsx";
 import { whatsappLink } from "../../config/negocio.js";
 
 // Etapas que ve el cliente, en el mismo orden que el proceso del taller.
@@ -37,33 +37,46 @@ export default function EquipoLookup() {
   const [marca, setMarca] = useState("");
   const [modelo, setModelo] = useState("");
   const [cargando, setCargando] = useState(false);
-  const [equipo, setEquipo] = useState(null);
-  const [error, setError] = useState("");
+  const [demora, setDemora] = useState(false);
+  const [equipos, setEquipos] = useState([]);
+  const [elegido, setElegido] = useState(0);
+  const [error, setError] = useState(null); // { code, msg }
 
   async function consultar(e) {
     e.preventDefault();
-    setError("");
-    setEquipo(null);
-    if (!dni.trim() || !marca.trim() || !modelo.trim()) {
-      setError("Completá DNI, marca y modelo tal como figuran en tu orden.");
+    setError(null);
+    setEquipos([]);
+    setElegido(0);
+
+    if (!dni || !marca.trim()) {
+      setError({ code: "DATOS_INCOMPLETOS", msg: "Completá el DNI del titular y la marca del equipo." });
       return;
     }
+    if (dni.length < 6 || dni.length > 9) {
+      setError({ code: "DNI_INVALIDO", msg: "El DNI tiene que tener entre 6 y 9 números, sin puntos." });
+      return;
+    }
+
     setCargando(true);
+    setDemora(false);
     try {
-      const data = await fetchEquipoByMarcaModeloDni({
-        dni: dni.trim(),
-        marca: marca.trim(),
-        modelo: modelo.trim(),
-      });
-      setEquipo(data);
-    } catch (err) {
-      setError(
-        err.message === "Equipo no encontrado"
-          ? "No encontramos un equipo con esos datos. Revisá que la marca y el modelo coincidan con tu orden."
-          : err.message || "No pudimos consultar el estado. Probá de nuevo en unos minutos."
+      const lista = await consultarEstadoEquipo(
+        { dni, marca: marca.trim(), modelo: modelo.trim() },
+        { alDemorar: () => setDemora(true) }
       );
+      if (lista.length === 0) {
+        setError({ code: "NO_ENCONTRADO", msg: "No encontramos un equipo con esos datos." });
+      } else {
+        setEquipos(lista);
+      }
+    } catch (err) {
+      setError({
+        code: err.code || "DESCONOCIDO",
+        msg: err.message || "Ocurrió un error inesperado al consultar el estado.",
+      });
     } finally {
       setCargando(false);
+      setDemora(false);
     }
   }
 
@@ -86,7 +99,9 @@ export default function EquipoLookup() {
           <input className="campo" value={marca} onChange={(e) => setMarca(e.target.value)} placeholder="Samsung" />
         </label>
         <label className="block">
-          <span className="block text-sm font-medium text-tinta-2">Modelo</span>
+          <span className="block text-sm font-medium text-tinta-2">
+            Modelo <span className="font-normal">(opcional)</span>
+          </span>
           <input className="campo" value={modelo} onChange={(e) => setModelo(e.target.value)} placeholder="A26" />
         </label>
         <button type="submit" disabled={cargando} className="btn-principal col-span-2 mt-1 disabled:opacity-70">
@@ -101,10 +116,40 @@ export default function EquipoLookup() {
       </form>
 
       <div aria-live="polite">
-        {error && (
-          <p className="mt-5 rounded-md bg-mesa px-4 py-3 text-[0.95rem] text-tinta">{error}</p>
+        {cargando && demora && (
+          <p className="mt-4 text-[0.95rem] text-tinta-2">
+            El servidor se está iniciando, puede tardar hasta un minuto. No cierres la página.
+          </p>
         )}
-        {equipo && <Resultado equipo={equipo} />}
+
+        {error && <ErrorConsulta error={error} />}
+
+        {equipos.length > 1 && (
+          <div className="mt-6">
+            <p className="text-sm font-medium text-tinta-2">Encontramos {equipos.length} equipos. Elegí cuál ver:</p>
+            <div className="mt-2 flex flex-wrap gap-2" role="tablist" aria-label="Tus equipos">
+              {equipos.map((eq, i) => (
+                <button
+                  key={eq.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === elegido}
+                  onClick={() => setElegido(i)}
+                  className={`rounded-md border-2 px-3 py-1.5 text-left text-sm font-semibold transition-colors ${
+                    i === elegido ? "border-tinta bg-tinta text-papel" : "border-linea text-tinta hover:border-tinta"
+                  }`}
+                >
+                  {[eq.marca, eq.modelo].filter(Boolean).join(" ")}
+                  <span className={`block text-xs font-normal ${i === elegido ? "text-white/70" : "text-tinta-2"}`}>
+                    Ingresó {formatearFecha(eq.fecha_ingreso)}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {equipos[elegido] && <Resultado key={equipos[elegido].id} equipo={equipos[elegido]} />}
       </div>
     </div>
   );
@@ -182,6 +227,28 @@ function Resultado({ equipo }) {
       >
         {listo ? "Avisar que paso a retirarlo" : "Preguntar por WhatsApp"}
       </a>
+    </div>
+  );
+}
+
+// Muestra qué falló, con el código para poder identificarlo,
+// y una salida por WhatsApp cuando el problema no es de los datos ingresados.
+function ErrorConsulta({ error }) {
+  const esDeDatos = ["DATOS_INCOMPLETOS", "DNI_INVALIDO", "NO_ENCONTRADO"].includes(error.code);
+  return (
+    <div role="alert" className="mt-5 rounded-md border-l-4 border-naranja bg-mesa px-4 py-3">
+      <p className="text-[0.95rem] font-medium text-tinta">{error.msg}</p>
+      <p className="mt-1 text-xs text-tinta-2">Código: {error.code}</p>
+      {!esDeDatos && (
+        <a
+          href={whatsappLink(`Hola, quise consultar el estado de mi equipo en la web y me dio el error ${error.code}.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-block text-sm font-semibold underline decoration-naranja decoration-2"
+        >
+          Consultar por WhatsApp
+        </a>
+      )}
     </div>
   );
 }
